@@ -2,7 +2,7 @@ package br.com.simplePayroll.repository;
 
 import br.com.simplePayroll.domain.department.Department;
 import br.com.simplePayroll.domain.employee.Employee;
-import br.com.simplePayroll.domain.employee_position.Office;
+import br.com.simplePayroll.domain.employee_position.Job;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
@@ -16,7 +16,7 @@ import java.util.Arrays;
 public class TestJpa implements CommandLineRunner {
 
     @Autowired
-    private OfficeRepository officeRepository;
+    private JobRepository officeRepository;
 
     @Autowired
     private DepartmentRepository departmentRepository;
@@ -29,7 +29,7 @@ public class TestJpa implements CommandLineRunner {
 
         Department department1 = new Department("Vendas");
 
-        Office office1 = new Office("Vendendor", department1, 3000.0);
+        Job office1 = new Job("Vendendor", department1, 3000.0);
 
         Employee employee1 = new Employee("Paulo", LocalDate.now(), office1);
         Employee employee2 = new Employee("Jose", LocalDate.now(), office1);
