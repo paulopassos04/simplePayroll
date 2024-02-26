@@ -1,6 +1,7 @@
 package br.com.simplePayroll.domain.department;
 
 import br.com.simplePayroll.domain.employee_position.Job;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -23,6 +24,7 @@ public class Department {
     private String description;
 
     @OneToMany(mappedBy = "department", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnore
     private Set<Job> jobs = new HashSet<>();
 
     public Department(String description) {

@@ -3,6 +3,10 @@ package br.com.simplePayroll.controller;
 import java.util.List;
 
 import br.com.simplePayroll.repository.EmployeeRepository;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,12 +26,13 @@ public class EmployeeController {
     @Autowired
     private EmployeeService employeeService;
 
-    @Autowired
-    private EmployeeRepository employeeRepository;
 
+    @Operation(summary = "Recuperar um empregado pelo nome", description = "", responses = {
+            @ApiResponse(responseCode = "200", description = "Recurso recuperado com sucesso", content = @Content(mediaType = "application/json"))
+    })
     @GetMapping("/{name}")
     public ResponseEntity<List<Employee>> findByName(@PathVariable("name") String name) {
-        List<Employee> employees = employeeRepository.findEmployeeByName(name);
+        List<Employee> employees = employeeService.findEmployeeByName(name);
         System.out.println(employees);
         return ResponseEntity.status(HttpStatus.OK).body(employees);
     }
