@@ -81,5 +81,5 @@ Desenvolver uma API RESTful simples e robusta em Java com Spring Boot para geren
 
 ## Documentação:
 
-- Documentação completa da API disponível no Swagger.
+- Documentação completa da API disponível no Swagger. http://localhost:8080/swagger-ui/index.html
 
