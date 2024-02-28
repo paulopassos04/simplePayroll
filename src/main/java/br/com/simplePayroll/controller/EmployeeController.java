@@ -1,7 +1,6 @@
 package br.com.simplePayroll.controller;
 
 import java.util.List;
-
 import br.com.simplePayroll.repository.EmployeeRepository;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
