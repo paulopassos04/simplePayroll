@@ -29,8 +29,7 @@ public class Job {
     @JoinColumn(name = "department_id", nullable = false)
     private Department department;
 
-    @OneToMany(mappedBy = "job", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JsonIgnore
+    @OneToMany(mappedBy = "job")
     private Set<Employee> employees = new HashSet<>();
 
     private Double salary;
