@@ -2,6 +2,7 @@ package br.com.simplePayroll.service;
 
 import java.util.List;
 
+import br.com.simplePayroll.domain.employee_position.Job;
 import br.com.simplePayroll.service.exception.EmployeeNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,9 +29,8 @@ public class EmployeeServiceImp implements EmployeeService {
     }
 
     @Override
-    public Employee findByJob(Long id) {
-        // TODO Auto-generated method stub
-        return null;
+    public List<Employee> findByJob(Long id) {
+        return employeeRepository.findJobsWithEmployeesById(id);
     }
 
     @Override

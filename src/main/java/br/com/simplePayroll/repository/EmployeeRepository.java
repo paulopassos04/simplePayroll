@@ -11,6 +11,7 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long> {
     @Query("SELECT e FROM Employee e JOIN e.job WHERE e.name LIKE %:name%")
     public List<Employee> findEmployeeByName(@Param("name") String name);
 
-
+    @Query("SELECT e FROM Employee e JOIN e.job job WHERE job.id = :id")
+    public List<Employee> findJobsWithEmployeesById(@Param("id") Long id);
 
 }
