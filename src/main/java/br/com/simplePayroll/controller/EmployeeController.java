@@ -12,12 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import br.com.simplePayroll.domain.employee.Employee;
 import br.com.simplePayroll.service.interfaces.EmployeeService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping(value = "/api/v1/employee")
@@ -39,8 +36,14 @@ public class EmployeeController {
 
     @GetMapping("/job/{id}")
     public ResponseEntity<List<Employee>> findByJob(@PathVariable("id") Long id) {
-        List<Employee> employees = employeeService.findByJob(id);
+        List<Employee> employees = employeeService.findByJobId(id);
         return ResponseEntity.status(HttpStatus.OK).body(employees);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Employee> findByJob(@PathVariable("id") Long id, @RequestBody Employee employee) {
+        employeeService.update(id, employee);
+        return ResponseEntity.status(HttpStatus.OK).build();
     }
 
 }

@@ -1,8 +1,8 @@
 package br.com.simplePayroll.service.interfaces;
 
 import java.util.List;
+import java.util.Optional;
 
-import br.com.simplePayroll.domain.employee_position.Job;
 import org.springframework.stereotype.Service;
 import br.com.simplePayroll.domain.employee.Employee;
 
@@ -11,14 +11,12 @@ public interface EmployeeService {
 
     public List<Employee> findEmployeeByName(String name);
 
-    public List<Employee> findByJob(Long id);
+    public List<Employee> findByJobId(Long id);
 
-    public Employee findByDepartment(Long id);
-
-    public Employee findById(Long id);
+    public Optional<Employee> findById(Long id);
 
     public void delete(Long id);
 
-    public void update(Long id);
+    public void update(Long id, Employee employeeBody);
 
 }
