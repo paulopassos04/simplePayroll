@@ -41,8 +41,14 @@ public class EmployeeController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Employee> findByJob(@PathVariable("id") Long id, @RequestBody Employee employee) {
+    public ResponseEntity<Employee> update(@PathVariable("id") Long id, @RequestBody Employee employee) {
         employeeService.update(id, employee);
+        return ResponseEntity.status(HttpStatus.OK).build();
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Employee> delete(@PathVariable("id") Long id) {
+        employeeService.delete(id);
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 
