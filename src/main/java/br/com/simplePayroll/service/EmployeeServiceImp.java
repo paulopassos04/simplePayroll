@@ -1,8 +1,8 @@
 package br.com.simplePayroll.service;
 
 import java.util.List;
+import java.util.Optional;
 
-import br.com.simplePayroll.domain.employee_position.Job;
 import br.com.simplePayroll.service.exception.EmployeeNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,6 +17,13 @@ public class EmployeeServiceImp implements EmployeeService {
     @Autowired
     private EmployeeRepository employeeRepository;
 
+
+    @Transactional
+    @Override
+    public Employee createEmployee(Employee employee) {
+        return employeeRepository.save(employee);
+    }
+
     @Transactional
     public List<Employee> findEmployeeByName(String name) {
             List<Employee> employees = employeeRepository.findEmployeeByName(name);
@@ -29,31 +36,31 @@ public class EmployeeServiceImp implements EmployeeService {
     }
 
     @Override
-    public List<Employee> findByJob(Long id) {
+    public List<Employee> findByJobId(Long id) {
         return employeeRepository.findJobsWithEmployeesById(id);
     }
 
     @Override
-    public Employee findByDepartment(Long id) {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public Employee findById(Long id) {
-        // TODO Auto-generated method stub
-        return null;
+    public Optional<Employee> findById(Long id) {
+        Employee employee = employeeRepository.findById(id).orElseThrow(() -> new EmployeeNotFoundException(String.format("Funcionário(a) ID %d não encontrado(a).", id)));
+        return Optional.ofNullable(employee);
     }
 
     @Override
     public void delete(Long id) {
-        // TODO Auto-generated method stub
-
+        findById(id);
+        employeeRepository.deleteById(id);
     }
 
     @Override
-    public void update(Long id) {
-        // TODO Auto-generated method stub
+    public void update(Long id, Employee employeeBody) {
+        Optional<Employee> employeeOptional = findById(id);
+
+            Employee employee = employeeOptional.get();
+            employee.setName(employeeBody.getName());
+            employee.setJob(employeeBody.getJob());
+
+            employeeRepository.save(employee);
 
     }
 
