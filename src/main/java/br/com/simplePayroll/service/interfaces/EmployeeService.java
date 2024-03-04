@@ -9,6 +9,8 @@ import br.com.simplePayroll.domain.employee.Employee;
 @Service
 public interface EmployeeService {
 
+    public Employee createEmployee(Employee employee);
+
     public List<Employee> findEmployeeByName(String name);
 
     public List<Employee> findByJobId(Long id);

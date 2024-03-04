@@ -17,6 +17,13 @@ public class EmployeeServiceImp implements EmployeeService {
     @Autowired
     private EmployeeRepository employeeRepository;
 
+
+    @Transactional
+    @Override
+    public Employee createEmployee(Employee employee) {
+        return employeeRepository.save(employee);
+    }
+
     @Transactional
     public List<Employee> findEmployeeByName(String name) {
             List<Employee> employees = employeeRepository.findEmployeeByName(name);

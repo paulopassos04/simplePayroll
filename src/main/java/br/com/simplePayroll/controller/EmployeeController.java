@@ -24,6 +24,16 @@ public class EmployeeController {
     @Autowired
     private EmployeeService employeeService;
 
+    @Operation(summary = "Cadastro do funcionário", description = "Cadastro do funcionário na base de dados", responses = {
+            @ApiResponse(responseCode = "200", description = "Recurso criado com sucesso", content = @Content(mediaType = "application/json")),
+            @ApiResponse(responseCode = "", description = "", content = @Content(mediaType = "application/json"))
+    })
+    @PostMapping
+    public ResponseEntity<Employee> create(@RequestBody Employee employeeBody){
+        Employee employee = employeeService.createEmployee(employeeBody);
+        return ResponseEntity.status(HttpStatus.CREATED).body(employee);
+    }
+
     @Operation(summary = "Busca por nome", description = "Busca do funcionário da base de dados usando o nome", responses = {
             @ApiResponse(responseCode = "200", description = "Recurso recuperado com sucesso", content = @Content(mediaType = "application/json")),
             @ApiResponse(responseCode = "404", description = "Funcionário(a) não encontrado(a)", content = @Content(mediaType = "application/json"))
